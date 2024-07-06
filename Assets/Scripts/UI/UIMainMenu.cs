@@ -1,21 +1,18 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class UIMainMenu : MonoBehaviour
 {
 
-    [SerializeField] private AudioClip MainMenuSound;
 
-    private void Awake()
+    public void SetFullScreen(bool isFullScreen)
     {
+        Screen.fullScreen = isFullScreen;
     }
-
     #region 
-    public void Main()
-    {
-        SoundManger.instance.PlaySound(MainMenuSound);
-    }
-
+    
     // Restart level
     public void Restart()
     {
@@ -31,12 +28,13 @@ public class UIMainMenu : MonoBehaviour
     // Start gameplay
     public void Gameplay()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     // Quit game/exit play mode if in Editor
     public void Quit()
     {
+        
         Application.Quit(); // Quits the game (only works in build)
 
         #if UNITY_EDITOR
